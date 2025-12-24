@@ -70,21 +70,59 @@ fractional-rwa-bonds/
 │
 └── README.md                  # Project documentation
 
-🧮 Yield Logic
-The contract uses a linear interest formula calculated by the second. On GitHub, this is rendered as:
-$$Interest = \frac{Principal \times APY \times \Delta t}{SecondsInYear \times 10000}$$
-This allows the UI to show a "Live Pulse" where the user's balance increases in real-time.
-🚀 Getting Started
-1. Clone & Install
-git clone [https://github.com/your-username/fractional-rwa-bonds.git](https://github.com/your-username/fractional-rwa-bonds.git)
+## 🧮 Yield Logic
+The contract uses a linear interest formula calculated per second:
+
+```text
+Interest = (Principal × APY × Δt) / (SecondsInYear × 10000)
+```
+
+- **Principal:** user's deposited amount (in the stablecoin unit)
+- **APY:** annual percentage yield in basis points (bps) — e.g. 500 = 5.00%
+- **Δt:** elapsed time in seconds
+- **SecondsInYear:** 31,536,000 (365 × 24 × 3600)
+
+This enables the frontend to render a "Live Pulse" where the user's balance increases in real-time.
+
+## 🚀 Getting Started
+1. Clone & install
+
+```bash
+git clone https://github.com/your-username/fractional-rwa-bonds.git
 cd fractional-rwa-bonds
 npm install
+```
+
 2. Deploy Contracts (Local Node)
+
+```bash
 npx hardhat node
 npx hardhat run scripts/deploy.js --network localhost
-Here is the entire content for your project documentation, including the README.md and the .gitignore file, all contained within code blocks so that the formatting and alignment remain perfect when you copy-paste them.1. The README.mdCreate a file named README.md in your project's root folder and paste this:Markdown# 🏦 Fractional RWA Bonds
-### *Democratizing the "Risk-Free Rate" through Blockchain Tokenization.*
+```
+
+3. Run tests
+
+```bash
+npx hardhat test
+```
+
+4. Run frontend (if present)
+
+```bash
+cd frontend
+npm run dev
+```
+
+## 🧪 Testing
+- Unit tests for interest calculation and contract behavior are in `blockchain/test`.
+- Tests use a `MockStablecoin` to simulate stablecoin interactions.
+
+## Contributing
+Contributions are welcome — open issues or submit a PR with a clear description and tests.
+
+## License
+This project is licensed under the MIT License. See `LICENSE` for details.
 
 ---
-✍️ Author
-Reverie Computer Engineering Student
+
+✍️ Author: Reverie — Computer Engineering Student
